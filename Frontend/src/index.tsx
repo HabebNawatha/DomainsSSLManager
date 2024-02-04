@@ -1,21 +1,42 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {createBrowserRouter,RouterProvider} from 'react-router-dom';
+import {createBrowserRouter,Outlet,RouterProvider} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
+import AboutUsPage from './pages/AboutUsPage';
+import NavBar from './layouts/NavBar';
+import { ChildProcess } from 'child_process';
 
-const router = createBrowserRouter([{
-  path:'/',
-  element:<HomePage/>,
-  errorElement:<NotFoundPage/>
-},{
-  path:'/profile',
-  element:<ProfilePage/>,
-}]);
+const AppLayout = () => {
+  return(
+    <>
+      <NavBar/>
+      <Outlet/>
+    </>
+  );
+};
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path:'/',
+        element:<HomePage/>,
+        errorElement:<NotFoundPage/>
+      },{
+        path:'/profile',
+        element:<ProfilePage/>,
+      },{
+        path:'/aboutus',
+        element:<AboutUsPage/>,
+      }
+    ]
+  },
+ ]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -25,8 +46,4 @@ root.render(
     <RouterProvider router={router}/>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
