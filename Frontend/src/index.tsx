@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 import AboutUsPage from './pages/AboutUsPage';
+import GetStartedPage from './pages/GetStartedPage';
 import NavBar from './layouts/NavBar';
 import { ChildProcess } from 'child_process';
 
@@ -33,6 +34,9 @@ const router = createBrowserRouter([
       },{
         path:'/aboutus',
         element:<AboutUsPage/>,
+      },{
+        path:'/getstarted',
+        element:<GetStartedPage/>,
       }
     ]
   },
