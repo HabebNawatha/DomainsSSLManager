@@ -3,7 +3,7 @@ import '../assets/NavBarStyle.css'
 import image from '../logo.svg';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import GetStartedButton from '../components/ui/GetStartedButton';
+import GetStartedButton from '../components/ui/CustomizedButton';
 
 
 export default function NavBar() {
@@ -16,7 +16,7 @@ export default function NavBar() {
             <nav className='navbar'>
                 <div className='navbar-logo'>
                     <Link to='/'>
-                    <img src={image} alt="Logo" style={{ width: '50px', height: 'auto' }} />
+                        <img src={image} alt="Logo" style={{ width: '50px', height: 'auto' }} />
                     </Link>
                 </div>
                 <div id='navbar-container' className={click ? "#navbar-container mobile" : "navbar-container"}>
@@ -40,14 +40,18 @@ export default function NavBar() {
                             </NavLink>
 
                         </li>
-                            <GetStartedButton/>
+                        <NavLink
+                            to="/getstarted"
+                            className="get-started-nav-link">
+                            <GetStartedButton buttonText="Get Started" />
+                        </NavLink>
                     </ul>
-                
+
                 </div>
                 <i className='menu-icon' onClick={handleClick}>
                     {click ? <FaTimes /> : <FaBars />}</i>
             </nav>
-            
+
         </>
     )
 }

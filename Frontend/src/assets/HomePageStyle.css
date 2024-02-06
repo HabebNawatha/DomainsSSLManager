@@ -1,0 +1,25 @@
+.home-page-container{
+    text-align: center;
+    font-family: "JetBrains Mono",monospace;
+}
+.home-page-inroduction-container{
+    width: min-content;
+}
+.home-page-inroduction-h1{
+    color:#541fc6b6;
+    font-size:300%;
+}
+.home-page-input-field {
+  height: 45px;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.5);
+  margin: 15px 0;
+  font-size: 16px;
+  width: 600px;
+  border: 1px solid rgba(10, 180, 180, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+  outline: none;
+}

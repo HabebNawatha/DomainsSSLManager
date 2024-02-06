@@ -7,6 +7,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color:rgb(238, 247, 255);
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 code {
