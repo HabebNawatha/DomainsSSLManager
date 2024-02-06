@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import '../assets/NavBarStyle.css'
-import image from '../logo.svg';
+import image from '../assets/images/logo.png';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import GetStartedButton from '../components/ui/CustomizedButton';
@@ -16,7 +16,7 @@ export default function NavBar() {
             <nav className='navbar'>
                 <div className='navbar-logo'>
                     <Link to='/'>
-                        <img src={image} alt="Logo" style={{ width: '50px', height: 'auto' }} />
+                        <img src={image} className="logo-img" alt="Logo" />
                     </Link>
                 </div>
                 <div id='navbar-container' className={click ? "#navbar-container mobile" : "navbar-container"}>
