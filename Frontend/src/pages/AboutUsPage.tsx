@@ -11,34 +11,19 @@ import React from 'react';
 import { useState } from 'react';
 
 export default function AboutUsPage() {
-
     const [activeMenuItem, setActiveMenuItem] = useState<string | null>(null);
-    const [isBlurred, setIsBlurred] = useState(false);
 
     const handleMenuItemClick = (menuItem: string) => {
         if (menuItem === activeMenuItem) {
             setActiveMenuItem(null);
-            setIsBlurred(false);
         } else {
             setActiveMenuItem(menuItem);
-            setIsBlurred(true);
         }
-
     };
+
     const handleCloseButtonClick = () => {
         setActiveMenuItem(null);
-        setIsBlurred(false);
     };
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
 
     const menuItemsContent: { [key: string]: string } = {
         "About Us": "Welcome to our platform! We are passionate about simplifying SSL certificate management  and making it accessible to everyone. In today's digital age, securing your online presence  is more important than ever, and SSL certificates play a crucial role in ensuring the security and integrity of your website.",
@@ -47,12 +32,13 @@ export default function AboutUsPage() {
         "Features": "Automated SSL certificates renewal and maintenance & we offer a simple easy to use dashboard to keep you updated on your certificate dates and status.",
         "Contact": "Feel free to contact us at: test@gmail.com",
     };
-
+    
     return (
-        <div className={`about-us-main-container ${activeMenuItem ? 'blurred' : ''}`}>            <div className="about-us-heading-container">
-            <h1>SCERTIFY</h1>
-            <h2>Everything you need to know!</h2>
-        </div>
+        <div className={`about-us-main-container ${activeMenuItem ? 'blurred' : ''}`}>
+            <div className="about-us-heading-container">
+                <h1>SCERTIFY</h1>
+                <h2>Everything you need to know!</h2>
+            </div>
             <div className="about-us-menu-container">
                 {Object.keys(menuItemsContent).map((menuItem) => (
                     <div className="menu-item" key={menuItem}>
@@ -60,20 +46,26 @@ export default function AboutUsPage() {
                             className={activeMenuItem === menuItem ? 'menu-item-circle active' : 'menu-item-circle'}
                             onClick={() => handleMenuItemClick(menuItem)}
                         >
-                            {menuItem}
+                            {activeMenuItem === menuItem ? (
+                               <React.Fragment>
+                               <div className='menu-item-content'>
+                                   <h3>{menuItem}</h3>
+                                   {menuItemsContent[menuItem]}
+                               </div>
+                           </React.Fragment>
+                            ) : (
+                                <h3>{menuItem}</h3>
+                            )}
                         </div>
-                        {activeMenuItem === menuItem && (
-                            <div className='menu-item-content'>
-                                <button className="close-button" onClick={() => setActiveMenuItem(null)}>x</button>
-                                {menuItemsContent[menuItem]}
-                            </div>
-                        )}
                     </div>
                 ))}
             </div>
         </div>
     );
 }
+
+
+
 
 
 
