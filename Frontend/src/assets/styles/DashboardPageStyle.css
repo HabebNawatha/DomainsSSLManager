@@ -1,0 +1,14 @@
+/* Example styles */
+.dashboard-container {
+    background-color: #f5f5f5;
+    padding: 24px;
+  }
+  
+  .domain-card:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+  }
+  
+  .grid-header{
+    color:#541fc6b6;
+  }
