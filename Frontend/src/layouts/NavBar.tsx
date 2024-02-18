@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import '../assets/NavBarStyle.css'
+import '../assets/styles/NavBarStyle.css'
 import image from '../assets/images/logo.png';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -10,6 +10,11 @@ export default function NavBar() {
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
+
+    function onClick() {
+
+
+    }
 
     return (
         <>
@@ -43,7 +48,12 @@ export default function NavBar() {
                         <NavLink
                             to="/getstarted"
                             className="get-started-nav-link">
-                            <GetStartedButton buttonText="Get Started" />
+                            <GetStartedButton buttonText="Get Started" onClick={onClick} />
+                        </NavLink>
+                        <NavLink
+                            to="/dashboard"
+                            className="get-started-nav-link">
+                            <GetStartedButton buttonText="My Dashboard" onClick={onClick} />
                         </NavLink>
                     </ul>
 

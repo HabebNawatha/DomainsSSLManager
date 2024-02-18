@@ -1,4 +1,4 @@
-import '../assets/AboutUsPageStyle.css';
+import '../assets/styles/AboutUsPageStyle.css';
 import image from '../assets/images/logo.png';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Dialog from '@mui/material/Dialog';

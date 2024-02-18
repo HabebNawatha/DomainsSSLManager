@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 import AboutUsPage from './pages/AboutUsPage';
 import GetStartedPage from './pages/GetStartedPage';
+import DashboardPage from './pages/DashboardPage';
 import NavBar from './layouts/NavBar';
 import { ChildProcess } from 'child_process';
 
@@ -37,6 +38,9 @@ const router = createBrowserRouter([
       },{
         path:'/getstarted',
         element:<GetStartedPage/>,
+      },{
+        path:'/dashboard',
+        element:<DashboardPage/>,
       }
     ]
   },
