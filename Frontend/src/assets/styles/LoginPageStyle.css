@@ -1,0 +1,103 @@
+.login-main-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.image-container-heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Adjust spacing */
+  }
+
+.image-container {
+    flex: 1;
+    background-image: radial-gradient(100% 100% at 100% 0, #8bd1ff 0, #9498c2 100%);
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between; 
+
+}
+
+.container-slogan {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #541fc6b6;
+    margin-left: 5px;
+    font-weight: bold;
+}
+.image-container-footer{
+    margin-bottom: 10px;
+}
+.container-footer {
+    font-size: 20px; /* Or adjust size */
+    font-weight: 500; /* Lighter */
+    color: #3a3a3a; /* Or your preferred color */
+    text-align: center;
+  }
+
+
+.container-logo-img {
+    width: 100px; /* Or adjust size */
+    border-radius: 5px; /* Or desired shape */
+    margin: 5px;
+  }
+
+  .login-form-container {
+    flex: 1; /* Occupies half the horizontal space */
+    display: flex;
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    padding: 20px;
+  }
+.login-form {
+    width: 100%;
+    max-width: 300px; /* Optional: Limit form width */
+    margin: 0 auto;
+}
+
+
+.login-form-h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form-input,
+.login-form-button
+ {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    box-sizing: border-box; 
+}
+
+.login-form-button{
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
