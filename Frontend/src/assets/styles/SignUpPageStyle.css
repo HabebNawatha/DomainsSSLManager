@@ -1,4 +1,4 @@
-.login-main-container {
+.signup-main-container {
     display: flex;
     height: 100vh;
     width: 100vw;
@@ -42,32 +42,32 @@
     margin: 5px;
   }
 
-  .login-form-container {
+  .signup-form-container {
     flex: 1; /* Occupies half the horizontal space */
     display: flex;
     align-items: center; /* Vertically center content */
     justify-content: center; /* Horizontally center content */
     padding: 20px;
   }
-.login-form {
+.signup-form {
     width: 100%;
     max-width: 300px; /* Optional: Limit form width */
     margin: 0 auto;
 }
 
 
-.login-form-h2 {
+.signup-form-h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.login-form-label {
+.signup-form-label {
     display: block;
     margin-bottom: 5px;
 }
 
-.login-form-input,
-.login-form-button
+.signup-form-input,
+.signup-form-button
  {
     width: 100%;
     padding: 10px;
@@ -76,7 +76,7 @@
     box-sizing: border-box; 
 }
 
-.login-form-button{
+.signup-form-button{
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -99,4 +99,33 @@
 a {
     color: #007bff;
     text-decoration: none;
+}
+.success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* Ensure it appears on top of other elements */
+}
+
+.success-popup p {
+    margin-bottom: 10px;
+}
+
+.success-popup button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.success-popup button:hover {
+    background-color: #0056b3;
 }

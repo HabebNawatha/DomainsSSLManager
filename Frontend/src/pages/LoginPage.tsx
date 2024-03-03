@@ -1,17 +1,45 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import '../assets/styles/LoginPageStyle.css';
 import image from '../assets/images/SSL_Certificates_manager_logo-2-removebg-preview.png';
 import { Height } from '@mui/icons-material';
 import { height } from '@mui/system';
+import axios from 'axios';
 
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (event: any) => {
+
+    const handleSubmit = async (event : any) => {
+        console.log("!!!");
+        
         event.preventDefault();
-        console.log('Email:', email);
-        console.log('Password:', password);
+    
+        try {
+            const response = await axios.post('http://localhost:8000/users/login', {
+                email,
+                password
+            });
+    
+            const data = response.data;
+            if (response.status === 200) {
+                // If the request is successful, you can handle the response data here
+                const token = data.token;
+                // Save the token to localStorage or sessionStorage
+                // Redirect the user to a new page or perform any other actions
+                // For example, redirect to the dashboard page
+                window.location.href = '/';
+            } else {
+                // Handle errors from the server response
+                console.error('Failed to log in:', data.message);
+                // You can display an error message to the user
+            }
+        } catch (error) {
+            // Handle network errors or unexpected errors
+            console.error('An error occurred while logging in:', error);
+            // You can display an error message to the user
+        }
     };
 
     return (
@@ -58,8 +86,11 @@ function LoginPage() {
 
                     <div className="links">
                         <a href="#">Forgot password?</a>
-                        <a href="#">Don't have an account? Sign Up</a>
-                    </div>
+                        <NavLink
+                            to="/signup"
+                        >
+                            Don't Have an account? Register Now!
+                        </NavLink>                    </div>
                 </form>
             </div>
         </div>
