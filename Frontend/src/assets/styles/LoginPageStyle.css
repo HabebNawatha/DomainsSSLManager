@@ -69,13 +69,21 @@
 .login-form-input,
 .login-form-button
  {
+    border-radius: 15px;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #1f35c65e;
     margin-bottom: 10px;
     box-sizing: border-box; 
 }
+.login-form-input.error{
+    border: 1px solid red;
 
+}
+.error-message{
+    font-size: 11px;
+    color: red;
+}
 .login-form-button{
     background-color: #007bff;
     color: #fff;

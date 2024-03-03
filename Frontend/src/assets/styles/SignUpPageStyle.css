@@ -57,6 +57,7 @@
 
 
 .signup-form-h2 {
+    font-size: 2em;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -69,19 +70,26 @@
 .signup-form-input,
 .signup-form-button
  {
+    font-size: 1em;
+    border-radius: 15px;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #1f35c65e;
     margin-bottom: 10px;
     box-sizing: border-box; 
 }
+.signup-form-input.error{
+    border: 1px solid red;
 
+}
+.error-message{
+    font-size: 11px;
+    color: red;
+}
 .signup-form-button{
     background-color: #007bff;
     color: #fff;
-    border: none;
     cursor: pointer;
-
 }
 
 .checkbox-container {
@@ -128,4 +136,11 @@ a {
 
 .success-popup button:hover {
     background-color: #0056b3;
+}
+
+.password-label-icon-div{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
 }

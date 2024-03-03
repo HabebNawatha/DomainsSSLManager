@@ -2,43 +2,28 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../assets/styles/LoginPageStyle.css';
 import image from '../assets/images/SSL_Certificates_manager_logo-2-removebg-preview.png';
-import { Height } from '@mui/icons-material';
-import { height } from '@mui/system';
-import axios from 'axios';
+import useFormSubmit from '../hooks/useFormSubmit';
+import { CircularProgress } from '@mui/material';
 
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    // Initialize the useFormSubmit hook with the appropriate URL
+    const { handleSubmit, loading, error } = useFormSubmit('http://localhost:8000/users/login');
 
-    const handleSubmit = async (event : any) => {
-        console.log("!!!");
-        
+    //Handle Submitting form to login
+    const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    
         try {
-            const response = await axios.post('http://localhost:8000/users/login', {
-                email,
-                password
-            });
-    
-            const data = response.data;
-            if (response.status === 200) {
-                // If the request is successful, you can handle the response data here
-                const token = data.token;
-                // Save the token to localStorage or sessionStorage
-                // Redirect the user to a new page or perform any other actions
-                // For example, redirect to the dashboard page
+            await handleSubmit({ email, password }, (data) => { // Pass callback function
+
+                // Successful response handling
+                console.log("Data:", data);
                 window.location.href = '/';
-            } else {
-                // Handle errors from the server response
-                console.error('Failed to log in:', data.message);
-                // You can display an error message to the user
-            }
+            });
         } catch (error) {
-            // Handle network errors or unexpected errors
             console.error('An error occurred while logging in:', error);
-            // You can display an error message to the user
         }
     };
 
@@ -54,11 +39,11 @@ function LoginPage() {
                 </div>
             </div>
             <div className="login-form-container">
-                <form onSubmit={handleSubmit} className='login-form'>
+                <form onSubmit={handleFormSubmit} className='login-form'>
                     <h2 className='login-form-h2'>Sign In</h2>
 
-                    <label className='login-form-label' htmlFor="email">Email Address:</label>
-                    <input className="login-form-input"
+                    <label className={`login-form-label ${error ? 'error' : ''}`} htmlFor="email">Email Address:</label>
+                    <input className={`login-form-input ${error ? 'error' : ''}`}
                         type="email"
                         id="email"
                         name="email"
@@ -67,8 +52,8 @@ function LoginPage() {
                         required
                     />
 
-                    <label className='login-form-label' htmlFor="password">Password:</label>
-                    <input className='login-form-input'
+                    <label className={`login-form-label ${error ? 'error' : ''}`} htmlFor="password">Password:</label>
+                    <input className={`login-form-input ${error ? 'error' : ''}`}
                         type="password"
                         id="password"
                         name="password"
@@ -76,21 +61,20 @@ function LoginPage() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-
+                    {error && <p className="error-message">{error}</p>}
                     <div className="checkbox-container">
                         <input className='login-form-input' type="checkbox" id="remember-me" name="remember-me" />
                         <label className='login-form-label' htmlFor="remember-me">Remember Me</label>
                     </div>
-
-                    <button className='login-form-button' type="submit">Sign In</button>
-
+                    <button className='login-form-button' type="submit" disabled={loading}>{loading ? <CircularProgress size={24} /> : 'Login'}</button>
                     <div className="links">
                         <a href="#">Forgot password?</a>
                         <NavLink
                             to="/signup"
                         >
                             Don't Have an account? Register Now!
-                        </NavLink>                    </div>
+                        </NavLink>
+                    </div>
                 </form>
             </div>
         </div>
