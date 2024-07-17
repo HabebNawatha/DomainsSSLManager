@@ -1,7 +1,7 @@
 import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter,Outlet,RouterProvider} from 'react-router-dom';
 import HomePage from './pages/HomePage';
@@ -10,15 +10,21 @@ import NotFoundPage from './pages/NotFoundPage';
 import AboutUsPage from './pages/AboutUsPage';
 import GetStartedPage from './pages/GetStartedPage';
 import DashboardPage from './pages/DashboardPage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 import NavBar from './layouts/NavBar';
+import { useLocation } from 'react-router-dom';
 import { ChildProcess } from 'child_process';
 
+
 const AppLayout = () => {
+  const location = useLocation();
   return(
     <>
-      <NavBar/>
-      <Outlet/>
-    </>
+<body className={location.pathname === '/login' || location.pathname === '/signup' ? 'noMargin' : 'margin'}>
+ {location.pathname !== '/login' && location.pathname !== '/signup' && <NavBar />}      <Outlet/>
+ </body>
+ </>
   );
 };
 const router = createBrowserRouter([
@@ -41,6 +47,12 @@ const router = createBrowserRouter([
       },{
         path:'/dashboard',
         element:<DashboardPage/>,
+      },{
+        path:'/login',
+        element:<LoginPage/>,
+      },{
+        path:'/signup',
+        element:<SignUpPage/>,
       }
     ]
   },
@@ -50,8 +62,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+
     <RouterProvider router={router}/>
-  </React.StrictMode>
 );
 reportWebVitals();
