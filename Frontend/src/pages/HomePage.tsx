@@ -46,6 +46,8 @@ export default function HomePage() {
         setShowModal(true)
         //fetchData();
     };
+
+    //MockCertificate
     const mockCertificateData = {
         domain: 'google.com',
         certificateDetails: {
