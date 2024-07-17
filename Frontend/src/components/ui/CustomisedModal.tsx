@@ -17,7 +17,7 @@ const CustomisedModal: React.FC<CustomisedModalProps> = ({ onClose, title, child
     };
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-
+        
     }
 
     return (
@@ -30,7 +30,6 @@ const CustomisedModal: React.FC<CustomisedModalProps> = ({ onClose, title, child
                 <div className="modal-content">
                     {children}
                 </div>
-                <button className='modal-close' onClick={handleClose}> Close </button>
                 <CustomisedButton onClick={handleSubmit}>Add to Dashboard</CustomisedButton>
             </div>
         </div>
