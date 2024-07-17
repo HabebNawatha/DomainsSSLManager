@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../assets/styles/HomePageStyle.css';
 import CustomisedButton from '../components/ui/CustomisedButton';
 import { CertificationData } from '../models/CertificationData';
@@ -8,11 +8,11 @@ import CustomisedModal from '../components/ui/CustomisedModal';
 import renderCertificateData from '../utils/renderCertificateData';
 
 export default function HomePage() {
+
     const [url, setUrl] = useState('');
     const [certificateData, setCertificateData] = useState<CertificationData | null>(null);
     const [customrError, setError] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
-
 
     const fetchData = async () => {
         try {
@@ -54,7 +54,8 @@ export default function HomePage() {
             validTo: 'Apr 29 08:03:55 2024 GMT',
             serialNumber: 'C389D85E94B24B6909EC2AA96C658A5A',
             fingerprint: '15:64:B9:36:57:83:FF:80:1D:11:90:74:39:EC:B1:FC:98:E7:B7:C7'
-        }
+        },
+        accessToken: localStorage.getItem('accessToken')
     };
 
     return (
@@ -72,15 +73,15 @@ export default function HomePage() {
                     <CustomisedButton onClick={handleSubmit}>Submit
                     </CustomisedButton>                </div>
             </div>
-            
-                {mockCertificateData && showModal && (
-                    
-                    <CustomisedModal title="Certificate Data" onClose={() => setShowModal(false)}> {/* Render the Modal component */}
+
+            {mockCertificateData && showModal && (
+
+                <CustomisedModal title="Certificate Data" onClose={() => setShowModal(false)}> {/* Render the Modal component */}
                     {renderCertificateData(mockCertificateData)}
-                    </CustomisedModal>
-                )}
-                {customrError && <p className="error-message">{customrError}</p>}
-            
+                </CustomisedModal>
+            )}
+            {customrError && <p className="error-message">{customrError}</p>}
+
         </div>
     );
 }

@@ -8,7 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function AboutUsPage() {
     const [activeMenuItem, setActiveMenuItem] = useState<string | null>(null);
@@ -32,9 +32,9 @@ export default function AboutUsPage() {
         "Features": "Automated SSL certificates renewal and maintenance & we offer a simple easy to use dashboard to keep you updated on your certificate dates and status.",
         "Contact": "Feel free to contact us at: test@gmail.com",
     };
-    
+
     return (
-        <div className={`about-us-main-container ${activeMenuItem ? 'blurred' : ''}`}>
+        <div className={`about-us-main-container ${activeMenuItem ? 'blurred' : ''}`} >
             <div className="about-us-heading-container">
                 <h1>SCERTIFY</h1>
                 <h2>Everything you need to know!</h2>
@@ -47,12 +47,12 @@ export default function AboutUsPage() {
                             onClick={() => handleMenuItemClick(menuItem)}
                         >
                             {activeMenuItem === menuItem ? (
-                               <React.Fragment>
-                               <div className='menu-item-content'>
-                                   <h3>{menuItem}</h3>
-                                   {menuItemsContent[menuItem]}
-                               </div>
-                           </React.Fragment>
+                                <React.Fragment>
+                                    <div className='menu-item-content'>
+                                        <h3>{menuItem}</h3>
+                                        {menuItemsContent[menuItem]}
+                                    </div>
+                                </React.Fragment>
                             ) : (
                                 <h3>{menuItem}</h3>
                             )}

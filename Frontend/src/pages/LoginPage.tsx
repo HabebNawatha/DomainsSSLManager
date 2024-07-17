@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink , useNavigate} from 'react-router-dom';
 import '../assets/styles/LoginPageStyle.css';
 import image from '../assets/images/SSL_Certificates_manager_logo-2-removebg-preview.png';
 import useFormSubmit from '../hooks/useFormSubmit';
 import { CircularProgress } from '@mui/material';
 
-function LoginPage() {
+function LoginPage(){
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -16,11 +17,11 @@ function LoginPage() {
     const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            await handleSubmit({ email, password }, (data) => { // Pass callback function
-
+            await handleSubmit({ email, password }, (data : any) => { // Pass callback function
                 // Successful response handling
-                console.log("Data:", data);
-                window.location.href = '/';
+                localStorage.setItem('accessToken', data.accessToken);
+                console.log("access token:", localStorage.getItem('accessToken'));
+                navigate("/");
             });
         } catch (error) {
             console.error('An error occurred while logging in:', error);
