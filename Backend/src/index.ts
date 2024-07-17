@@ -1,7 +1,11 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import sslServiceRouter from './routes/sslServiceRouter';
-
+import { certificatesRouter } from './routes/certificatesRouter';
+import { connectToDatabase } from './services/database.service';
+import { usersRouter } from './routes/users.router';
+import { dashboardRouter } from './routes/dashboard.router';
+import { authenticateToken } from './middleware/AuthenticateToken';
+import cors from 'cors';
 
 // Load environment variables
 dotenv.config();
@@ -10,29 +14,30 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 8000;
 
-// Middleware to parse JSON bodies
+// Middlewares
 app.use(express.json());
+app.use(cors());
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+connectToDatabase()
+    .then(() => {
+        console.log('Database connected successfully');
 
+        // Routes
+        app.use('/certificate', certificatesRouter);
+        app.use('/users', usersRouter);
+        app.use('/dashboard', authenticateToken, dashboardRouter);
 
-// Routes
-app.use('/ssl-service', sslServiceRouter);
-//app.use('/other-service', otherServiceRouter);
+        // Default route
+        app.get('/', (req: Request, res: Response) => {
+            res.send('Welcome to Express & TypeScript Server');
+        });
 
-// Default route
-app.get('/', (req: Request, res: Response) => {
-    res.send('Welcome to Express & TypeScript Server');
-});
-
-// Start server
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
+        // Start server
+        app.listen(port, () => {
+            console.log(`Server is running at http://localhost:${port}`);
+        });
+    })
+    .catch((error: Error) => {
+        console.error('Database connection failed', error);
+        process.exit(1); // Exit the process with a failure status code
+    });
