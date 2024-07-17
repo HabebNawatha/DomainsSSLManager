@@ -17,49 +17,37 @@ import DomainCard from '../components/ui/DomainCard'; // Import your DomainCard 
 import '../assets/styles/DashboardPageStyle.css';
 import { CertificationData } from '../models/CertificationData';
 import { sortByDomainNameAsc, sortByDomainNameDesc, sortByValidToDateAsc, sortByValidToDateDesc } from '../models/CertificationData';
-
-
-// Replace with your actual data or data fetching logic
-const domainData: CertificationData[] = [
-    {
-        domain: 'google.com',
-        certificateDetails: {
-            issuer: { C: 'US', O: 'Google Trust Services LLC', CN: 'GTS CA 1C3' },
-            validFrom: 'Jan 29 08:04:47 2024 GMT',
-            validTo: 'Apr 22 08:04:46 2024 GMT',
-            serialNumber: '929CDF7F59C08AE9099B8CC9716EB04A',
-            fingerprint: '66:92:08:3D:8D:29:C3:CF:50:3F:34:A3:87:1B:18:29:A9:9A:66:A2',
-        },
-    },
-    {
-        domain: 'youtube.com',
-        certificateDetails: {
-            issuer: { C: 'US', O: 'Google Trust Services LLC', CN: 'GTS CA 1C3' },
-            validFrom: 'Jan 29 08:04:47 2024 GMT',
-            validTo: 'Apr 21 08:04:46 2024 GMT',
-            serialNumber: '929CDF7F59C08AE9099B8CC9716EB04A',
-            fingerprint: '66:92:08:3D:8D:29:C3:CF:50:3F:34:A3:87:1B:18:29:A9:9A:66:A2',
-        },
-    },
-    {
-        domain: 'Linkedin.com',
-        certificateDetails: {
-            issuer: { C: 'US', O: 'Google Trust Services LLC', CN: 'GTS CA 1C3' },
-            validFrom: 'Jan 29 08:04:47 2024 GMT',
-            validTo: 'Apr 23 08:04:46 2024 GMT',
-            serialNumber: '929CDF7F59C08AE9099B8CC9716EB04A',
-            fingerprint: '66:92:08:3D:8D:29:C3:CF:50:3F:34:A3:87:1B:18:29:A9:9A:66:A2',
-        },
-    },
-
-];
-
-
+import axios from 'axios';
 
 const DashboardPage = () => {
+
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
     const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
+    const [certificates, setCertificates] = useState<CertificationData[]>([]);
+
+    //Fetch certificates for user.
+    useEffect(() => {
+        const fetchCertificates = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get('http://localhost:8000/dashboard/', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                });
+                setCertificates(response.data.certificates);
+            } catch (err) {
+                console.error('Error fetching certificates:', err);
+                setError('Failed to fetch certificates');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCertificates();
+    }, []);
+
+    //Applying filter
     const applyFilter = (data: CertificationData[], filter: string): CertificationData[] => {
         switch (filter) {
             case 'domainNameAsc':
@@ -74,14 +62,10 @@ const DashboardPage = () => {
                 return data;
         }
     };
-
-    const filteredData = selectedFilter ? applyFilter(domainData, selectedFilter) : domainData; // Sorted data based on filter (if available)
-
+    const filteredData = selectedFilter ? applyFilter(certificates, selectedFilter) : certificates;
     const handleFilterChange = (event: any) => {
         setSelectedFilter(event.target.value as string | null);
     };
-
-
 
     return (
         <Container maxWidth="lg">
