@@ -1,18 +1,16 @@
 import express, { Request, Response, Router } from 'express';
-import sslService from '../services/sslService'; // Import your SSL service module
+import certificateController from '../controllers/certificateController'
 
-// Create a new Express router
-const router: Router = express.Router();
+// Global Config
+export const certificatesRouter: Router = express.Router();
 
-// Define routes for SSL-related requests
-
-// Example SSL endpoint to get certificate data for a domain
-router.get('/certificate', async (req: Request, res: Response) => {
+//GET certificate
+certificatesRouter.get('/certificate', async (req: Request, res: Response) => {
     const domain = req.query.domain as string;
 
     try {
-        const certificateData = await sslService.getCertificateData(domain); // Await the promise
-        if (certificateData) { // Check if data exists
+        const certificateData = await certificateController.getCertificateData(domain);
+        if (certificateData) {
             console.log('Certificate data from service:', certificateData);
 
             const formattedData = {
@@ -25,19 +23,17 @@ router.get('/certificate', async (req: Request, res: Response) => {
                     fingerprint: certificateData.certificateDetails.fingerprint
                 }
             };
-
+            console.log("formatted data: ",formattedData);
             res.json({
-                message: 'Certificate data retrieved successfully', // Add human-readable message
+                message: 'Certificate data retrieved successfully',
                 data: formattedData,
             });
         } else {
             res.status(500).json({ message: 'No certificate data found in response' });
         }
     } catch (error: any) {
-        console.error('Error from service:', error); // Log the error
+        console.error('Error from service:', error);
         res.status(500).json({ message: 'Failed to fetch certificate data', error: error.message });
     }
 });
 
-// Export the router to be used in the main application
-export default router; 
