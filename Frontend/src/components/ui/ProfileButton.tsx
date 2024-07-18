@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
@@ -20,7 +19,6 @@ const ProfileButton: React.FC<Props> = ({ onLogout }) => {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('accessToken');
         onLogout();
         toggleNavbar();
     }
