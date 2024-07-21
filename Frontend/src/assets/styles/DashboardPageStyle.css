@@ -4,11 +4,22 @@
     padding: 24px;
   }
   
-  .domain-card:hover {
-    background-color: #f2f2f2;
-    cursor: pointer;
-  }
-  
   .grid-header{
     color:#541fc6b6;
+  }
+  .projects-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: start;
+  }
+  .card-delete-btn{
+    background:none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    visibility: hidden;
+  }
+  .card-delete-btn.visible{
+    visibility: visible;
   }
