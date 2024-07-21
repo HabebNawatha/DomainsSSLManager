@@ -63,7 +63,7 @@ export default function HomePage() {
     return (
         <div className="home-page-container">
             <div className="home-page-introduction-container">
-                <h1 className="home-page-inroduction-h1">Simplify SSL Certificate Management</h1>
+                <h1 className="home-page-introduction-h1">Simplify SSL Certificate Management</h1>
                 <h1>Easy Links, Simple as It Gets!</h1>
                 <div className="home-page-link-container">
                     <input
@@ -73,7 +73,8 @@ export default function HomePage() {
                         onChange={(e) => setUrl(e.target.value)}
                     />
                     <CustomisedButton onClick={handleSubmit}>Submit
-                    </CustomisedButton>                </div>
+                    </CustomisedButton>
+                </div>
             </div>
 
             {mockCertificateData && showModal && (

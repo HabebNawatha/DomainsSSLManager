@@ -22,8 +22,7 @@ const LoginPage: React.FC = () => {
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await handleSubmit({ email, password }, (data: any) => { // Pass callback function
-        // Successful response handling
+      await handleSubmit({ email, password }, (data: any) => {
         localStorage.setItem('accessToken', data.accessToken);
         handleLogin();
         navigate("/");

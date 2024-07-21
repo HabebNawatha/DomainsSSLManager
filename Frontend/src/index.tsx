@@ -14,7 +14,7 @@ import SignUpPage from './pages/SignUpPage';
 import NavBar from './layouts/NavBar';
 import AppContext from './hooks/useAppContext';
 import ProtectedRoute from './services/ProtectedRoute';
-import axios from 'axios';
+import api from './services/api';
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
@@ -23,30 +23,30 @@ const AppLayout: React.FC = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      try {
-        const response = await axios.post('http://localhost:8000/users/authenticate-token', {}, {
-          headers: {
-            'Authorization': `Bearer ${token}`
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        try {
+          const response = await api.post('/users/authenticate-token', {}, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          if (response.status === 200) {
+            console.log(response);
+            setIsLoggedIn(true);
+          } else {
+            setIsLoggedIn(false);
           }
-        });
-        if (response.status === 200) {
-          console.log(response);
-          setIsLoggedIn(true);
-        } else {
+        } catch (error) {
+          console.error('Error authenticating token:', error);
           setIsLoggedIn(false);
         }
-      } catch (error) {
-        console.error('Error authenticating token:', error);
+      } else {
         setIsLoggedIn(false);
       }
-    } else {
-      setIsLoggedIn(false);
-    }
-    setLoading(false);
-  };
-  checkAuth();
+      setLoading(false);
+    };
+    checkAuth();
   }, []);
 
   const handleLogin = () => {

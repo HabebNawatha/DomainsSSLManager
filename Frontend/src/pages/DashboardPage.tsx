@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api'; // Import the Axios instance
 import CertificatesToolbar from '../components/ui/DashboardToolbar';
 import DomainCard from '../components/ui/DomainCard';
 import {
@@ -55,11 +55,7 @@ const DashboardPage: React.FC = () => {
         const fetchCertificates = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:8000/dashboard/', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-                    },
-                });
+                const response = await api.get('/dashboard');
                 setCertificates(response.data.certificates);
             } catch (err) {
                 console.error('Error fetching certificates:', err);
@@ -91,10 +87,12 @@ const DashboardPage: React.FC = () => {
         }
         setCertificates([...sortedCertificates]); // Ensure state update triggers re-render
     };
+
     const handleEditClick = () => {
         setIsEditMode(!isEditMode);
     }
-    const handleDeleteCard = (domain:string) => {
+
+    const handleDeleteCard = (domain: string) => {
         setCertificates(certificates.filter(cert => cert.domain !== domain));
     }
 
@@ -103,20 +101,21 @@ const DashboardPage: React.FC = () => {
             <CertificatesToolbar onSortChange={handleSortChange} onEditClick={handleEditClick} />
             <div className='certificates-container'>
                 {loading ? (
-                    <div className='loading-certificates'> Loading...</div>
+                    <div className='loading-certificates'>Loading...</div>
                 ) : error ? (
-                    <div className='error-certificates'> Error</div>
+                    <div className='error-certificates'>Error</div>
                 ) : (
                     <div className='projects-section'>
                         {certificates.map((domain) => (
-                            <div className='domain-card-div'>
+                            <div className='domain-card-div' key={domain.domain}>
                                 <DomainCard
-                                    key={domain.domain}
                                     domain={domain.domain}
                                     certificateDetails={domain.certificateDetails}
                                 />
-                                <button className={`card-delete-btn ${isEditMode ? 'visible' : ''}`}
-                                    onClick={() => handleDeleteCard(domain.domain)}>
+                                <button
+                                    className={`card-delete-btn ${isEditMode ? 'visible' : ''}`}
+                                    onClick={() => handleDeleteCard(domain.domain)}
+                                >
                                     <Delete />
                                 </button>
                             </div>

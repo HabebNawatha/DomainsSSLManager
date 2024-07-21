@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 const useFormSubmit = <T>(url: string) => {
     const [loading, setLoading] = useState(false);
@@ -11,26 +11,22 @@ const useFormSubmit = <T>(url: string) => {
         setError(null);
 
         try {
-            const response = await axios.post(url, formData);
+            const response = await api.post(url, formData);
             if (response.status === 200) {
                 onSuccess(response.data); // Set data on successful response
+                setData(response.data);
             } else {
                 setError('An unexpected error occurred');
             }
-            // If the request is successful, you can handle the response data here
         } catch (error: any) {
-            if (axios.isAxiosError(error)) {
-                if (error.response) {
-                    if (error.response.status === 409) {
-                        setError('Email already exists'); // Handle 409 conflict error
-                    } else {
-                        setError(error.response.data.message); // Access the error message sent from the server
-                    }
+            if (error.response) {
+                if (error.response.status === 409) {
+                    setError('Email already exists'); // Handle 409 conflict error
                 } else {
-                    setError('Network Error: Please check your internet connection'); // Handle network errors
+                    setError(error.response.data.message); // Access the error message sent from the server
                 }
             } else {
-                setError('An error occurred while processing your request'); // Handle unexpected errors
+                setError('Network Error: Please check your internet connection'); // Handle network errors
             }
         } finally {
             setLoading(false);

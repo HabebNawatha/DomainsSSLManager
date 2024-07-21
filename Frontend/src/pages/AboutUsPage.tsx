@@ -1,14 +1,6 @@
 import '../assets/styles/AboutUsPageStyle.css';
-import image from '../assets/images/logo.png';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material'
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function AboutUsPage() {
     const [activeMenuItem, setActiveMenuItem] = useState<string | null>(null);
@@ -19,10 +11,6 @@ export default function AboutUsPage() {
         } else {
             setActiveMenuItem(menuItem);
         }
-    };
-
-    const handleCloseButtonClick = () => {
-        setActiveMenuItem(null);
     };
 
     const menuItemsContent: { [key: string]: string } = {
