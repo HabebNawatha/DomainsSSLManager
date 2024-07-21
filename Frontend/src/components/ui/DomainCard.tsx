@@ -47,21 +47,21 @@ const DomainCard: React.FC<CertificationData> = ({ domain, certificateDetails })
       ? 'expiring'
       : 'valid';
 
-      const getExpiresTypographyClassName = () => {
-        switch (cardStatusClass) {
-          case 'valid':
-            return 'valid-expires-typography';
-          case 'expiring':
-            return 'expiring-expires-typography';
-          case 'expired':
-            return 'expired-expires-typography';
-          default:
-            return 'typography';
-        }
-      };
+  const getExpiresTypographyClassName = () => {
+    switch (cardStatusClass) {
+      case 'valid':
+        return 'valid-expires-typography';
+      case 'expiring':
+        return 'expiring-expires-typography';
+      case 'expired':
+        return 'expired-expires-typography';
+      default:
+        return 'typography';
+    }
+  };
 
   return (
-    <Card className={`domain-card ${cardStatusClass}`} onClick={() => setIsExpanded(!isExpanded)}>
+    <Card className={`domain-card ${cardStatusClass} ${isExpanded ? 'expanded' : ''}`} onClick={() => setIsExpanded(!isExpanded)}>
       <CardHeader 
         title={domain}
         className="custom-card-header"
@@ -71,7 +71,7 @@ const DomainCard: React.FC<CertificationData> = ({ domain, certificateDetails })
           </IconButton>
         }
       />
-      <CardContent>
+      <CardContent className="card-content">
         {isExpanded ? (
           <>
             <Typography variant="body1">Issuer: {certificateDetails.issuer.O}</Typography>
@@ -92,7 +92,7 @@ const DomainCard: React.FC<CertificationData> = ({ domain, certificateDetails })
             <Tooltip title={new Date(certificateDetails.validTo).toLocaleDateString()}>
               <Typography variant="body1">Valid To: {new Date(certificateDetails.validTo).toLocaleDateString().slice(0, 10)}</Typography>
             </Tooltip>
-            <Typography variant="body1"  className={getExpiresTypographyClassName()}>
+            <Typography variant="body1" className={getExpiresTypographyClassName()}>
               Expires in: {remainingTime.days} days, {remainingTime.hours} hours, {remainingTime.minutes} minutes, {remainingTime.seconds} seconds
             </Typography>
           </>

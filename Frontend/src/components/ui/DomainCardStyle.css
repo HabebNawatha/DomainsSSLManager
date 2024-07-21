@@ -1,35 +1,56 @@
 .domain-card {
-    margin-bottom: 30px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden; 
+  width: 100%;
+  max-width: 500px; 
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.card-content {
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  max-height: 400px; 
+  overflow-y: auto; 
+  word-break: break-word;
+}
+
+.domain-card.expanded .card-content {
+  max-height: none;
+}
+
+.domain-card.valid {
+  background-color: #e6f8dd;
+}
+
+.domain-card.expiring {
+  background-color: #fff5cc;
+}
+
+.domain-card.expired {
+  background-color: #fce4e4;
+}
+
+.custom-card-header .MuiCardHeader-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .domain-card {
+    margin: 8px;
   }
   
-  .domain-card.valid {
-    background-color: #e6f8dd; /* Light green for valid cards */
-  }
-  
-  .domain-card.expiring {
-    background-color: #fff5cc; /* Light yellow for expiring cards */
-  }
-  
-  .domain-card.expired {
-    background-color: #fce4e4; /* Light red for expired cards */
+  .card-content {
+    padding: 8px;
   }
 
   .custom-card-header .MuiCardHeader-title {
-    font-weight: bold;
-    font-size: 25px;
+    font-size: 1.25rem;
   }
-
-  .valid-expires-typography {
-    color: #41a60b;
-  }
-  
-  .expiring-expires-typography {
-    color: #b1900a;
-  }
-  
-  .expired-expires-typography {
-    color: #af0d0d;
-  }
+}

@@ -1,25 +1,62 @@
-.home-page-container{
+/* Base styles */
+.home-page-container {
     text-align: center;
-    font-family: "JetBrains Mono",monospace;
-}
-.home-page-inroduction-container{
-    width: min-content;
-}
-.home-page-inroduction-h1{
-    color:#541fc6b6;
-    font-size:300%;
-}
-.home-page-input-field {
-  height: 45px;
-  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.5);
-  margin: 15px 0;
-  font-size: 16px;
-  width: 600px;
-  border: 1px solid rgba(10, 180, 180, 1);
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  background: rgba(255, 255, 255, 0.2);
-  color: rgb(0, 0, 0);
-  outline: none;
-}
+    font-family: "JetBrains Mono", monospace;
+    padding: 20px; /* Add padding for better spacing */
+  }
+  
+  .home-page-introduction-container {
+    margin: 0 auto; /* Center container */
+    padding: 20px; /* Add padding */
+  }
+  
+  .home-page-introduction-h1 {
+    color: #541fc6b6;
+    font-size: 2.5rem; /* Use rem for scalability */
+    margin-bottom: 10px;
+  }
+  
+  .home-page-input-field {
+    height: 45px;
+    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.5);
+    margin: 15px 0;
+    font-size: 1rem; /* Use rem for scalability */
+    width: 100%; /* Full width on smaller screens */
+    max-width: 600px; /* Limit max width */
+    border: 1px solid rgba(10, 180, 180, 1);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(0, 0, 0);
+    outline: none;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  /* Media Queries for responsiveness */
+  @media (max-width: 768px) {
+    .home-page-introduction-h1 {
+      font-size: 2rem; /* Smaller font size for smaller screens */
+    }
+  
+    .home-page-input-field {
+      font-size: 0.875rem; /* Slightly smaller font size */
+      width: 100%; /* Full width */
+      padding: 10px; /* Add padding */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .home-page-introduction-h1 {
+      font-size: 1.5rem; /* Further reduce font size */
+    }
+  
+    .home-page-input-field {
+      font-size: 0.75rem; /* Smaller font size */
+      padding: 8px; /* Add padding */
+    }
+  }
+  

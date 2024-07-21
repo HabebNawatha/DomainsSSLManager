@@ -1,103 +1,183 @@
 .about-us-main-container {
     text-align: center;
     position: relative;
+    padding: 0 20px;
+}
+
+.about-us-heading-container {
+    margin-bottom: 20px;
+}
+
+.about-us-heading-container h1 {
+    font-size: 2.5rem;
+}
+
+.about-us-heading-container h2 {
+    color: #541fc6b6;
+    font-size: 1.5rem;
 }
 
 .about-us-menu-container {
-    justify-content: center;
     margin-top: 10px;
-    left: 0;
-    width: 100%;
-    height: 100%;
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
     padding: 0;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 2;
-}
-
-h2 {
-    color: #541fc6b6
 }
 
 .menu-item {
-    margin: 10px;
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.menu-item:nth-child(1) {
-    grid-column: 1;
-}
-
-.menu-item:nth-child(2) {
-    grid-column: 2;
-
-}
-
-.menu-item:nth-child(3) {
-    grid-column: 3;
-
-}
-
-.menu-item:nth-child(4) {
-    grid-column: 4;
-
-}
-
-.menu-item:nth-child(5) {
-    grid-column: 5;
-
+    justify-content: center;
 }
 
 .menu-item-circle {
-    margin-bottom: 5px;
-    grid-area: 1/1;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 95px;
-    height: 95px;
+    width: 80px;
+    height: 80px;
     opacity: 1;
     background: radial-gradient(100% 100% at 100% 0, #9f5aff 0, #5468ff 100%);
     border-radius: 50%;
     text-align: center;
     text-decoration: none;
-    transition: 0.2s;
+    transition: 0.3s;
     color: white;
     box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .4) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
-    font-size: 14px;
-    transition: width 0.4s ease-in-out, height 0.4s ease-in-out, left 0.4s ease-in-out, transform 0.4s ease-in-out;
+    font-size: 12px;
+    padding: 10px;
+    overflow: hidden;
+    white-space: normal;
+    word-wrap: break-word;
+}
 
+.menu-item-circle h3 {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.2;
 }
 
 .menu-item-circle:hover {
-    font-size: 19px;
+    font-size: 14px;
     box-shadow: rgba(45, 35, 66, .6) 0 4px 8px, rgba(45, 35, 66, .6) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-    transform: translateY(-15px);
-    transition:  0.2s ease-in-out;
-    width: 120px;
-    height: 120px;
-
+    transform: translateY(-10px);
+    width: 100px;
+    height: 100px;
 }
 
 .menu-item-circle.active {
-    font-size: 19px;
+    font-size: 14px;
     box-shadow: rgba(45, 35, 66, .6) 0 4px 8px, rgba(45, 35, 66, .6) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-    width: 500px;
-    height: 500px;
-    transition:  0.4s ease-in-out;
+    width: 300px;
+    height: 300px;
+    transition: 0.4s ease-in-out;
+    padding: 20px;
 }
+
+.menu-item-circle.active h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
 .menu-item-circle.active .menu-item-content {
     display: flex;
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
     animation: fadeIn 2s; 
+    font-size: 0.9em;
 }
+
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
-  }
-  
-  
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .about-us-heading-container h1 {
+        font-size: 2rem;
+    }
+    
+    .about-us-heading-container h2 {
+        font-size: 1.2rem;
+    }
+
+    .menu-item-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 10px;
+    }
+
+    .menu-item-circle h3 {
+        font-size: 0.8em;
+    }
+
+    .menu-item-circle:hover {
+        width: 80px;
+        height: 80px;
+        font-size: 12px;
+    }
+
+    .menu-item-circle.active {
+        width: 250px;
+        height: 250px;
+        font-size: 12px;
+        padding: 15px;
+    }
+
+    .menu-item-circle.active h3 {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+
+    .menu-item-circle.active .menu-item-content {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-us-heading-container h1 {
+        font-size: 1.5rem;
+    }
+    
+    .about-us-heading-container h2 {
+        font-size: 1rem;
+    }
+
+    .menu-item-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 8px;
+    }
+
+    .menu-item-circle h3 {
+        font-size: 0.6em;
+    }
+
+    .menu-item-circle:hover {
+        width: 70px;
+        height: 70px;
+        font-size: 10px;
+    }
+
+    .menu-item-circle.active {
+        width: 200px;
+        height: 200px;
+        font-size: 10px;
+        padding: 10px;
+    }
+
+    .menu-item-circle.active h3 {
+        font-size: 0.8em;
+        margin-bottom: 6px;
+    }
+
+    .menu-item-circle.active .menu-item-content {
+        font-size: 0.7em;
+    }
+}
