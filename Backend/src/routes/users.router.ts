@@ -5,6 +5,7 @@ import { collections } from "../services/database.service";
 import User from "../models/user";
 import bcrypt from "bcrypt";
 import jwt,{Secret} from "jsonwebtoken";
+import { authenticateToken } from '../middleware/AuthenticateToken';
 
 // Global Config
 export const usersRouter = express.Router();
@@ -162,3 +163,17 @@ usersRouter.post("/login", async (req: Request, res: Response) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
+//AUTHENTICATE TOKEN
+usersRouter.post('/authenticate-token', authenticateToken, (req: Request, res: Response) => {
+    try {
+      const user = req.user;
+      res.status(200).json({
+        message: 'Token is valid',
+        user
+      });
+    } catch (error) {
+      console.error('Error in /authenticate-token route:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });

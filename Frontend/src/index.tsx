@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -14,6 +14,7 @@ import SignUpPage from './pages/SignUpPage';
 import NavBar from './layouts/NavBar';
 import AppContext from './hooks/useAppContext';
 import ProtectedRoute from './services/ProtectedRoute';
+import axios from 'axios';
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
@@ -21,13 +22,31 @@ const AppLayout: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const checkAuth = async () => {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      setIsLoggedIn(true);
+      try {
+        const response = await axios.post('http://localhost:8000/users/authenticate-token', {}, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (response.status === 200) {
+          console.log(response);
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error('Error authenticating token:', error);
+        setIsLoggedIn(false);
+      }
     } else {
       setIsLoggedIn(false);
     }
     setLoading(false);
+  };
+  checkAuth();
   }, []);
 
   const handleLogin = () => {
@@ -38,7 +57,7 @@ const AppLayout: React.FC = () => {
     localStorage.removeItem('accessToken');
     setIsLoggedIn(false);
   };
-  if(loading){
+  if (loading) {
     return <div> Loading... </div>
   }
   return (

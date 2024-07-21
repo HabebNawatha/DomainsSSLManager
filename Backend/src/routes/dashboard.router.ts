@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { authenticateToken } from '../middleware/AuthenticateToken'; // Import your authentication middleware
-import Certificate from '../models/Certificate'; // Import your Certificate model
+import { authenticateToken } from '../middleware/AuthenticateToken';
+import Certificate from '../models/Certificate';
 import { collections } from '../services/database.service';
 
 //Global Config
@@ -11,7 +11,6 @@ dashboardRouter.use(express.json());
 dashboardRouter.get('/', authenticateToken, async (req: Request, res: Response) => {
     try {
         const userEmail = req.user?.email;
-        console.log(userEmail);
 
         if (!userEmail) {
             return res.status(401).json({ message: 'Unauthorized' }); 
