@@ -6,6 +6,7 @@ const ProtectedRoute: React.FC = () => {
   const { isLoggedIn } = useContext(AppContext) as AppContextType;
 
   if (!isLoggedIn) {
+    console.log(isLoggedIn);
     return <Navigate to="/login" replace />;
   }
 

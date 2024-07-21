@@ -18,6 +18,7 @@ import ProtectedRoute from './services/ProtectedRoute';
 const AppLayout: React.FC = () => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
@@ -26,6 +27,7 @@ const AppLayout: React.FC = () => {
     } else {
       setIsLoggedIn(false);
     }
+    setLoading(false);
   }, []);
 
   const handleLogin = () => {
@@ -36,7 +38,9 @@ const AppLayout: React.FC = () => {
     localStorage.removeItem('accessToken');
     setIsLoggedIn(false);
   };
-
+  if(loading){
+    return <div> Loading... </div>
+  }
   return (
     <AppContext.Provider value={{ isLoggedIn, handleLogin, handleLogout }}>
       <body className={location.pathname === '/login' || location.pathname === '/signup' ? 'noMargin' : 'margin'}>
