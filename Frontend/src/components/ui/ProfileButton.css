@@ -1,64 +1,88 @@
-/* ProfileButton.css */
+.profile {
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height:100%;
+}
 
-.profile-button-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .profile-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    padding: 8px;
-  }
-  
-  .profile-icon {
-    color: #555;
-    font-size: 1.5rem;
-  }
-  
-  .dropdown-content {
-    position: absolute;
-    top: 40px; /* Adjust vertical position */
-    right: 0;
-    background-color: #fff; /* Dropdown background color */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Box shadow for dropdown */
-    border: 1px solid #ccc; /* Optional: Border for dropdown */
-    border-radius: 5px; /* Optional: Border radius for dropdown */
-    padding: 10px;
-    z-index: 1; /* Ensure dropdown is above other content */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .dropdown-content.open {
-    display: block;
-  }
-  
-  .dropdown-content a {
-    color: #333;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .dropdown-option {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    padding: 10px;
-    width: 100%;
-    text-align: left;
-  }
-  
-  .dropdown-option:hover {
-    background-color: #f1f1f1;
-  }
-  
+.action .menu {
+  position: absolute;
+  top: 120px;
+  right: 0px;
+  background: #fff;
+  width: 200px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  transition: 0.5s;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1000;
+}
+
+.action .menu.active {
+  top: 70px;
+  visibility: visible;
+  opacity: 1;
+}
+
+.action .menu::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.action .menu h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  padding: 20px 0;
+  font-weight: 500;
+  color: #000000;
+  line-height: 1.5em;
+}
+
+.action .menu h3 span {
+  font-size: 14px;
+  color: #cecece;
+  font-weight: 300;
+}
+
+.action .menu ul li {
+  list-style: none;
+  padding: 16px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+.action .menu ul li a, .action .menu ul li button {
+  display: inline-block;
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  transition: 0.5s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.action .menu ul li button {
+  margin: 0;
+  padding: 0;
+  font-size:medium;
+}
+
+.action .menu ul li:hover a , .action:hover {
+  color: #43b4ad;
+}
+.action .menu ul li:hover button{
+  color: #ff0000;
+}
