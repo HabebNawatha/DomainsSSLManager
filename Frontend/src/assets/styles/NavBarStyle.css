@@ -69,6 +69,9 @@
 .nav-item:hover .nav-link {
   color: #43b4ad;
 }
+.nav-item:hover{
+  color: #43b4ad;
+}
 
 .nav-item::after {
   content: "";
@@ -112,7 +115,7 @@
   }
 
   .navbar-nav {
-    justify-content:start;
+    justify-content:flex-start;
     list-style-type: none;
     display: flex;
     flex-direction: column;
