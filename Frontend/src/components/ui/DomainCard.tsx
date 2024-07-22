@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, Typography, IconButton } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import '../ui/DomainCardStyle.css';
+import '../ui/DomainCard.css';
 import { CertificationData } from '../../models/CertificationData';
 
 const DomainCard: React.FC<CertificationData> = ({ domain, certificateDetails }) => {

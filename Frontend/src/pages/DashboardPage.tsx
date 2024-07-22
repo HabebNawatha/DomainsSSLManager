@@ -98,7 +98,9 @@ const DashboardPage: React.FC = () => {
 
     return (
         <div>
+            <div className='tool-bar-div'>
             <CertificatesToolbar onSortChange={handleSortChange} onEditClick={handleEditClick} />
+            </div>
             <div className='certificates-container'>
                 {loading ? (
                     <div className='loading-certificates'>Loading...</div>
