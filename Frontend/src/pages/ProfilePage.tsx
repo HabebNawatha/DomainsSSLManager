@@ -32,7 +32,9 @@ export default function ProfilePage() {
           const response = await api.put(`/users/${user?.userId}`, updatedUser);
           if (response.status === 200) {
             console.log('User updated successfully');
-            setEditMode(false)
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+            setEditMode(false);
           }
         } catch (err) {
           console.error('Error updating user: ', err);
