@@ -88,13 +88,27 @@ usersRouter.post("/", async (req: Request, res: Response) => {
 
 // PUT
 usersRouter.put("/:id", async (req: Request, res: Response) => {
-    const id = req?.params?.id;
+    const id = req.params.id;
+    const { password, ...updateFields } = req.body as User;
 
     try {
-        const updatedUser: User = req.body as User;
-        const query = { _id: new ObjectId(id) };
+        const user = await collections.users?.findOne({ _id: new ObjectId(id) });
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
 
-        const result = await collections.users?.updateOne(query, { $set: updatedUser });
+        if (!password) {
+            return res.status(400).send('Password is required to update user details');
+        }
+            const isPasswordMatch = await bcrypt.compare(password, user.password);
+            if (!isPasswordMatch) {
+                return res.status(401).send('Current password is incorrect');
+            }
+
+        const result = await collections.users?.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: updateFields }
+        );
 
         result
             ? res.status(200).send(`Successfully updated user with id ${id}`)
