@@ -1,0 +1,71 @@
+.profile-first-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .profile-info-section {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    row-gap: 10px;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .grid-item {
+    padding: 10px;
+  }
+  
+  .label {
+    font-weight: bold;
+    text-align: left;
+    padding-right: 20px;
+  }
+  
+  .value {
+    text-align: left;
+    padding-left: 20px;
+  }
+  
+  .separator {
+    grid-column: 1 / span 2;
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
+  }
+  
+  .input-field {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .input-field.editable {
+    background-color: #fff;
+    border-color: #43b4ad;
+  }
+  
+  .profile-btn-section {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .cancel-profile-edit{
+    margin-top: 2px;
+    visibility: visible;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #b70e02;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
